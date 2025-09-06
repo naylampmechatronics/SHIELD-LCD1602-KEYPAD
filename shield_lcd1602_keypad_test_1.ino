@@ -18,7 +18,7 @@ void setup() {
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
   // Print a message to the LCD.
-  lcd.print("hello, world!");
+  lcd.print("hola mundo - NM!");
 }
 
 void loop() {
@@ -27,5 +27,28 @@ void loop() {
   lcd.setCursor(0, 1);
   // print the number of seconds since reset:
   lcd.print(millis() / 1000);
+
+  int x;
+  x = analogRead (0);
+  lcd.setCursor(10,1);
+  if (x < 60) {
+    lcd.print ("Right ");
+  }
+  else if (x < 200) {
+    lcd.print ("Up    ");
+  }
+  else if (x < 400){
+    lcd.print ("Down  ");
+  }
+  else if (x < 600){
+    lcd.print ("Left  ");
+  }
+  else if (x < 800){
+    lcd.print ("Select");
+  }
+  else if (x < 1024){
+    lcd.print ("      ");
+  }
+
 }
 
