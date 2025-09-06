@@ -5,48 +5,27 @@
 // Date: 05/09/2025
 // ---------------------------------------------------------------------------
 
+// include the library code:
+#include <LiquidCrystal.h>
 
-#define R_EN 4
-#define L_EN 5
-#define R_PWM 6
-#define L_PWM 7
+// initialize the library by associating any needed LCD interface pin
+// with the arduino pin number it is connected to
+const int rs = 8, en = 9, d4 = 4, d5 = 5, d6 = 6, d7 = 7;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+//LiquidCrystal lcd(8,9,4,5,6,7);
 
 void setup() {
-  pinMode(R_EN, OUTPUT);
-  pinMode(L_EN, OUTPUT);
-  pinMode(R_PWM, OUTPUT);
-  pinMode(L_PWM, OUTPUT);
-
-  Serial.begin(9600);
-  Serial.println("BTS7960 Motor Driver Test");
+  // set up the LCD's number of columns and rows:
+  lcd.begin(16, 2);
+  // Print a message to the LCD.
+  lcd.print("hello, world!");
 }
 
 void loop() {
-  // Forward motion
-  digitalWrite(R_EN, HIGH);
-  digitalWrite(L_EN, HIGH);
-  analogWrite(R_PWM, 150); // Set speed (0-255)
-  analogWrite(L_PWM, 0);
-  delay(2000);
-
-  // Stop
-  digitalWrite(R_EN, LOW);
-  digitalWrite(L_EN, LOW);
-  analogWrite(R_PWM, 0);
-  analogWrite(L_PWM, 0);
-  delay(1000);
-
-  // Reverse motion
-  digitalWrite(R_EN, HIGH);
-  digitalWrite(L_EN, HIGH);
-  analogWrite(R_PWM, 0);
-  analogWrite(L_PWM, 150); // Set speed (0-255)
-  delay(2000);
-
-  // Stop
-  digitalWrite(R_EN, LOW);
-  digitalWrite(L_EN, LOW);
-  analogWrite(R_PWM, 0);
-  analogWrite(L_PWM, 0);
-  delay(1000);
+  // set the cursor to column 0, line 1
+  // (note: line 1 is the second row, since counting begins with 0):
+  lcd.setCursor(0, 1);
+  // print the number of seconds since reset:
+  lcd.print(millis() / 1000);
 }
+
